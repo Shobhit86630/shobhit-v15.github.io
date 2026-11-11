@@ -57,7 +57,7 @@ export type Thought = {
 };
 
 export const site = {
-  url: "https://shobhit-v15.github.io",
+  url: "https://shobhit86630.github.io/Shobhit-Bawangarh-Portfolio",
   title: "Shobhit Bawangarh — Software Engineer | AI Engineer",
   description:
     "Portfolio of Shobhit Bawangarh, a software engineer building reliable backend systems, production web apps and AI-powered tooling.",
