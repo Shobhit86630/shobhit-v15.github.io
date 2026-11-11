@@ -1,0 +1,191 @@
+@import "tailwindcss";
+
+/* ───────────── Design tokens ───────────── */
+:root {
+  --bg: #0f0e0d;
+  --bg-elevated: #151312;
+  --surface: #1c1a19;
+  --surface-hover: #242120;
+  --border: rgba(182, 180, 189, 0.2);
+  --border-soft: rgba(255, 255, 255, 0.08);
+  --text: #ffffff;
+  --text-muted: #998f8f;
+  --text-dim: #6a6b6e;
+  --heading-dim: #3a3634;
+  --accent: #f46c38;
+  --lime: #c5ff41;
+  --cream: #faf7f3;
+  --radius-sm: 10px;
+  --radius-md: 16px;
+  --radius-lg: 24px;
+  --container: 1100px;
+  --sidebar: 340px;
+  --card-ring: transparent;
+  --shadow-card: 0 30px 60px rgba(0, 0, 0, 0.35);
+  color-scheme: dark;
+}
+
+/* Light theme: explicit choice, or the system preference when nothing is stored */
+:root[data-theme="light"] {
+  --bg: #faf7f3;
+  --bg-elevated: #ffffff;
+  --surface: #f0ebe5;
+  --surface-hover: #e8e1d9;
+  --border: rgba(21, 19, 18, 0.14);
+  --border-soft: rgba(21, 19, 18, 0.08);
+  --text: #151312;
+  --text-muted: #675f5e;
+  --text-dim: #8a8382;
+  --heading-dim: #c9bfb6;
+  --card-ring: rgba(21, 19, 18, 0.08);
+  --shadow-card: 0 30px 60px rgba(80, 50, 30, 0.14);
+  color-scheme: light;
+}
+@media (prefers-color-scheme: light) {
+  :root:not([data-theme="dark"]) {
+    --bg: #faf7f3;
+    --bg-elevated: #ffffff;
+    --surface: #f0ebe5;
+    --surface-hover: #e8e1d9;
+    --border: rgba(21, 19, 18, 0.14);
+    --border-soft: rgba(21, 19, 18, 0.08);
+    --text: #151312;
+    --text-muted: #675f5e;
+    --text-dim: #8a8382;
+    --heading-dim: #c9bfb6;
+    --card-ring: rgba(21, 19, 18, 0.08);
+    --shadow-card: 0 30px 60px rgba(80, 50, 30, 0.14);
+    color-scheme: light;
+  }
+}
+
+/* Smooth colour cross-fade only while the theme is being switched */
+html.theme-switching,
+html.theme-switching *,
+html.theme-switching *::before,
+html.theme-switching *::after {
+  transition: background-color 0.35s ease, color 0.35s ease, border-color 0.35s ease, fill 0.35s ease !important;
+}
+
+@theme inline {
+  --color-bg: var(--bg);
+  --color-bg-elevated: var(--bg-elevated);
+  --color-surface: var(--surface);
+  --color-surface-hover: var(--surface-hover);
+  --color-line: var(--border);
+  --color-line-soft: var(--border-soft);
+  --color-fg: var(--text);
+  --color-muted: var(--text-muted);
+  --color-dim: var(--text-dim);
+  --color-heading-dim: var(--heading-dim);
+  --color-accent: var(--accent);
+  --color-lime: var(--lime);
+  --color-cream: var(--cream);
+  --font-sans: var(--font-poppins), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-inter), var(--font-poppins), ui-sans-serif, sans-serif;
+  --radius-card: var(--radius-md);
+  --breakpoint-tab: 810px;
+  --breakpoint-desk: 1080px;
+}
+
+/* ───────────── Base ───────────── */
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 96px;
+  background: var(--bg);
+  overflow-x: clip;
+}
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-poppins), ui-sans-serif, system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  overflow-x: hidden;
+  overflow-x: clip;
+}
+
+::selection { background: var(--accent); color: #fff; }
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 6px;
+}
+
+/* ───────────── Components ───────────── */
+@layer components {
+  .display {
+    font-family: var(--font-inter), sans-serif;
+    font-weight: 800;
+    letter-spacing: -0.045em;
+    line-height: 0.9;
+    text-transform: uppercase;
+  }
+  .section-title {
+    font-family: var(--font-inter), sans-serif;
+    font-weight: 800;
+    letter-spacing: -0.045em;
+    line-height: 0.88;
+    text-transform: uppercase;
+    font-size: clamp(3rem, 9vw, 5.9rem);
+  }
+  .eyebrow {
+    font-size: 0.75rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+  }
+  .tag {
+    display: inline-flex;
+    align-items: center;
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    padding: 0.2rem 0.65rem;
+    font-size: 0.72rem;
+    color: var(--text-muted);
+    white-space: nowrap;
+  }
+  .field {
+    width: 100%;
+    background: var(--surface);
+    border: 1px solid var(--border-soft);
+    border-radius: var(--radius-sm);
+    padding: 0.85rem 1rem;
+    font-size: 0.95rem;
+    color: var(--text);
+    transition: border-color 0.2s, background 0.2s;
+  }
+  .field::placeholder { color: var(--text-dim); }
+  .field:focus { outline: none; border-color: var(--accent); background: var(--surface-hover); }
+}
+
+/* Navbar handwritten name — strokes "write" the outline, then the ink fills in */
+.signature text {
+  font-family: var(--font-script), cursive;
+  font-size: 44px;
+  fill: currentColor;
+  fill-opacity: 0;
+  stroke: currentColor;
+  stroke-width: 0.9;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  paint-order: stroke;
+  stroke-dasharray: 600;
+  stroke-dashoffset: 600;
+  animation: signature-write 2.2s cubic-bezier(0.65, 0, 0.35, 1) 0.3s forwards,
+    signature-ink 0.6s ease 1.9s forwards;
+}
+@keyframes signature-write { to { stroke-dashoffset: 0; } }
+@keyframes signature-ink { to { fill-opacity: 1; } }
+
