@@ -68,6 +68,7 @@ export const site = {
 export const profile = {
   name: "Shobhit Bawangarh",
   firstName: "Shobhit",
+  lastName: "Bawangarh",
   monogram: "SB",
   title: "Software Engineer | AI Engineer",
   headline: ["SOFTWARE", "& AI ENGINEER"] as const,

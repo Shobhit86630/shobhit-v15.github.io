@@ -103,7 +103,7 @@ export function Navbar() {
           className="group -ml-1 flex h-11 items-center px-1 text-fg transition-transform duration-300 hover:-rotate-3 hover:scale-105"
         >
           <svg className="signature h-12 w-[136px] overflow-visible" viewBox="0 0 136 48" aria-hidden="true">
-            <text x="2" y="37">{profile.firstName}</text>
+            <text x="2" y="37">{profile.firstName } {profile.lastName}</text>
           </svg>
         </a>
 
