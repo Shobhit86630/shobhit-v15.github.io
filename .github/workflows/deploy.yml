@@ -24,13 +24,16 @@ jobs:
           node-version: 22
           cache: npm
       - run: npm ci
+      # Ask GitHub Pages where this repo is served, so the base path and URL
+      # are always right: "" for a <user>.github.io repo, "/<repo>" otherwise.
+      - id: pages
+        uses: actions/configure-pages@v5
       - run: npm run build
         env:
-          # Empty for a user site (shobhit-v15.github.io). Use "/<repo>" for a project site.
-          NEXT_PUBLIC_BASE_PATH: "/Shobhit-Bawangarh-Portfolio"
+          NEXT_PUBLIC_BASE_PATH: ${{ steps.pages.outputs.base_path }}
+          NEXT_PUBLIC_SITE_URL: ${{ steps.pages.outputs.base_url }}
       # Type-check after build so Next has generated next-env.d.ts
       - run: npm run lint
-      - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:
           path: ./out

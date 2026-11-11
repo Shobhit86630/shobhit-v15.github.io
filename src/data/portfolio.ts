@@ -57,7 +57,8 @@ export type Thought = {
 };
 
 export const site = {
-  url: "https://shobhit86630.github.io/Shobhit-Bawangarh-Portfolio",
+  // Set at build time by the deploy workflow from the GitHub Pages URL.
+  url: (process.env.NEXT_PUBLIC_SITE_URL || "https://shobhit86630.github.io").replace(/\/$/, ""),
   title: "Shobhit Bawangarh — Software Engineer | AI Engineer",
   description:
     "Portfolio of Shobhit Bawangarh, a software engineer building reliable backend systems, production web apps and AI-powered tooling.",
